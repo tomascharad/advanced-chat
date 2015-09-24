@@ -81,7 +81,7 @@ function timeFormat(msTime) {
 
 $(document).ready(function() {
   //setup "global" variables first
-  var socket = io.connect("https://transituc-advanced-chat.herokuapp.com/");
+  var socket = io.connect("http://transituc-advanced-chat.herokuapp.com/");
   var myRoomID = null;
 
   $("form").submit(function(event) {
