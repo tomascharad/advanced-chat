@@ -7,11 +7,13 @@ var express = require('express')
 , Room = require('./room.js')
 , _ = require('underscore')._;
 
-app.configure(function() {
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+
 	app.set('port', process.env.PORT || 3000);
   	// app.set('ipaddr', process.env.IP || "127.0.0.1");
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
+	app.use(bodyParser());
+	app.use(methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use('/components', express.static(__dirname + '/components'));
 	app.use('/js', express.static(__dirname + '/js'));
@@ -27,7 +29,6 @@ app.configure(function() {
 	//     //process.exit(1);
 	// }
 
-});
 
 app.get('/', function(req, res) {
   res.render('index.html');
