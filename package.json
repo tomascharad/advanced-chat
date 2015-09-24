@@ -4,19 +4,18 @@
   "description": "node.js/socket.io chat app",
   "main": "server.js",
   "dependencies": {
-    "ejs": "~0.8.5",
-    "express": "~3.4.8",
-    "node-uuid": "~1.4.1",
-    "nodemon": "~1.0.13",
-    "npid": "~0.4.0",
-    "socket.io": "~0.9.16",
-    "shrinkwrap": "~0.0.3",
-    "underscore": "~1.5.2",
-    "bower": "*"
+    "bower": "*",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "node-uuid": "*",
+    "nodemon": "*",
+    "npid": "*",
+    "shrinkwrap": "*",
+    "socket.io": "*",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/satrapade/advanced-chat.git"
