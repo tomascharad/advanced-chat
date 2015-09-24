@@ -10,7 +10,6 @@
     "node-uuid": "https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.3.tgz",
     "nodemon": "^1.7.0",
     "npid": "^0.4.0",
-    "shrinkwrap": "0.0.3",
     "socket.io": "https://registry.npmjs.org/socket.io/-/socket.io-0.9.17.tgz",
     "underscore": "^1.8.3"
   },
