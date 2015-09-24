@@ -11,8 +11,8 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 	app.set('port', process.env.PORT || 3000);
-  	// app.set('ipaddr', process.env.IP || "127.0.0.1");
-	app.use(bodyParser());
+  // app.set('ipaddr', process.env.IP || "127.0.0.1");
+	app.use(bodyParser.json());
 	app.use(methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use('/components', express.static(__dirname + '/components'));
