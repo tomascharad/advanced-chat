@@ -12,7 +12,7 @@
     "socket.io": "~0.9.16",
     "shrinkwrap": "~0.0.3",
     "underscore": "~1.5.2",
-    "bower": "~1.2.8"
+    "bower": "*"
   },
   "devDependencies": {},
   "scripts": {
