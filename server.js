@@ -275,7 +275,7 @@ io.sockets.on("connection", function (socket) {
 				var whisperTo = whisperStr[1];
 				var whisperMsg = whisperStr[2];
 				socket.emit("whisper", {name: "You"}, whisperMsg);
-				io.sockets.socket(whisperId).emit("whisper", msTime, people[socket.id], whisperMsg);
+				io.sockets.connected(whisperId).emit("whisper", msTime, people[socket.id], whisperMsg);
 			} else {
 				socket.emit("update", "Can't find " + whisperTo);
 			}
