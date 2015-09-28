@@ -1,7 +1,7 @@
 var express = require('express')
 , app = express()
 , server = require('http').createServer(app)
-, io = require("socket.io").listen(server)
+, io = require("socket.io").listen(server, {origins: '*:*'})
 , npid = require("npid")
 , uuid = require('node-uuid')
 , Room = require('./room.js')
@@ -57,7 +57,6 @@ server.listen(app.get('port'), app.get('ipaddr'), function(){
 });
 
 io.set("log level", 1);
-io.set('origins', '*:*');
 var people = {};
 var rooms = {};
 var sockets = [];
