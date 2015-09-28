@@ -10,55 +10,50 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-	app.set('port', process.env.PORT || 3000);
-  // app.set('ipaddr', process.env.IP || "127.0.0.1");
-	app.use(bodyParser.json());
-	app.use(methodOverride());
-	app.use(express.static(__dirname + '/public'));
-	app.use('/components', express.static(__dirname + '/components'));
-	app.use('/js', express.static(__dirname + '/js'));
-	app.use('/icons', express.static(__dirname + '/icons'));
-	app.set('views', __dirname + '/views');
-	app.engine('html', require('ejs').renderFile);
+// TCT: Allow cros origin
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
-	// TCT: Allow cros origin
-	// app.use(function (req, res, next) {
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-	//     // Website you wish to allow to connect
-	//     res.setHeader('Access-Control-Allow-Origin', '*');
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-	//     // Request methods you wish to allow
-	//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
-	//     // Request headers you wish to allow
-	//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  // Pass to next layer of middleware
+  next();
+});
 
-	//     // Set to true if you need the website to include cookies in the requests sent
-	//     // to the API (e.g. in case you use sessions)
-	//     res.setHeader('Access-Control-Allow-Credentials', true);
+app.set('port', process.env.PORT || 3000);
+// app.set('ipaddr', process.env.IP || "127.0.0.1");
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(express.static(__dirname + '/public'));
+app.use('/components', express.static(__dirname + '/components'));
+app.use('/js', express.static(__dirname + '/js'));
+app.use('/icons', express.static(__dirname + '/icons'));
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
 
-	//     // Pass to next layer of middleware
-	//     next();
-	// });
-
-	/* Store process-id (as priviledged user) */
-	// try {
-	//     npid.create('/var/run/advanced-chat.pid', true);
-	// } catch (err) {
-	//     console.log(err);
-	//     //process.exit(1);
-	// }
-
+/* Store process-id (as priviledged user) */
+// try {
+//     npid.create('/var/run/advanced-chat.pid', true);
+// } catch (err) {
+//     console.log(err);
+//     //process.exit(1);
+// }
 
 app.get('/', function(req, res) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-
 	// Request methods you wish to allow
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
 	// Request headers you wish to allow
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
 	// Set to true if you need the website to include cookies in the requests sent
 	// to the API (e.g. in case you use sessions)
 	res.setHeader('Access-Control-Allow-Credentials', true);
@@ -70,6 +65,7 @@ server.listen(app.get('port'), app.get('ipaddr'), function(){
 });
 
 io.set("log level", 1);
+io.set('origins', '*:*');
 var people = {};
 var rooms = {};
 var sockets = [];
