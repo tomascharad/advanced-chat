@@ -405,7 +405,7 @@ function getPersonBySocketId (socketId) {
 	return person;
 }
 
-function Person (email, name, ownerRoomID, inRoomID, device, socket) {
+function Person (email, name, ownerRoomID, inRoomID, device, socket, companyCode) {
 	var person = this;
 	person.email = email;
 	person.name = name;
