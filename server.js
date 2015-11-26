@@ -57,7 +57,7 @@ server.listen(app.get('port'), app.get('ipaddr'), function(){
 });
 
 io.set("log level", 1);
-var people = {};
+var people = [];
 var rooms = {};
 var sockets = [];
 var chatHistory = {};
@@ -245,6 +245,7 @@ io.sockets.on("connection", function (socket) {
 	});
 
 	socket.on("typing", function(data) {
+		// TCT: This will crash since we are changing people object to an array
 		if (typeof people[socket.id] !== "undefined")
 			io.sockets.in(socket.room).emit("isTyping", {isTyping: data, person: person.name});
 	});
@@ -270,11 +271,11 @@ io.sockets.on("connection", function (socket) {
 							whisperTo = whisperStr[1];
 							var whisperMsg = whisperStr[2];
 							socket.emit("whisper", msTime, {name: "You"}, whisperMsg);
-							io.sockets.connected[whisperId].emit("whisper", msTime, people[socket.id], whisperMsg);
+							io.sockets.connected[whisperId].emit("whisper", msTime, getPersonBySocket(socket), whisperMsg);
 							
 							// TCT: Review following case
 							if (io.sockets.manager.roomClients[socket.id]['/'+socket.room] !== undefined ) {
-								io.sockets.in(socket.room).emit("chat", msTime, people[socket.id], msg);
+								io.sockets.in(socket.room).emit("chat", msTime, getPersonBySocket(socket), msg);
 								socket.emit("isTyping", false);
 								if (_.size(chatHistory[socket.room]) > 10) {
 									chatHistory[socket.room].splice(0,1);
