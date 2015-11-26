@@ -207,7 +207,7 @@ function purge(s, action) {
 io.sockets.on("connection", function (socket) {
 	var person = getPersonBySocket(socket);
 
-	socket.on("joinserver", function(email, name, device) {
+	socket.on("joinserver", function(email, name, device, companyCode) {
 		var person = null;
 		var ownerRoomID = inRoomID = null;
 
@@ -216,12 +216,16 @@ io.sockets.on("connection", function (socket) {
 			person.sockets.push(socket);
 			socket.emit("exists", {msg: "The username already exists, you can still use this connection", proposedName: proposedName});
 		} else {
-			people.push(new Person(email, name, ownerRoomID, inRoomID, device, socket));
+			var joinedPerson = new Person(email, name, ownerRoomID, inRoomID, device, socket, companyCode);
+			people.push(joinedPerson);
 			socket.emit("update", "You have connected to the server.");
-			io.sockets.emit("update", people[socket.id].name + " is online.");
+			var sameCompanyPersons = getSameCompanyPersons(joinedPerson);
+			sameCompanyPersons.forEach(function(person) {
+				person.socket.emit("update", email + " is online.");
+				person.socket.emit("update-people", {people: sameCompanyPersons, count: sizePeople});
+			});
 			sizePeople = _.size(people);
 			sizeRooms = _.size(rooms);
-			io.sockets.emit("update-people", {people: people, count: sizePeople});
 			socket.emit("roomList", {rooms: rooms, count: sizeRooms});
 			socket.emit("joined"); //extra emit for GeoLocation
 			sockets.push(socket);
@@ -409,6 +413,7 @@ function Person (email, name, ownerRoomID, inRoomID, device, socket) {
 	person.inRoomID = inRoomID;
 	person.device = device;
 	person.sockets = [socket];
+	person.companyCode = companyCode;
 	return person;
 }
 
@@ -432,4 +437,8 @@ function getAllPeopleSockets () {
 		});
 	});
 	return sockets;
+}
+
+function getSameCompanyPersons (requestedCompanyPerson) {
+	return people.filter(function(person) {return person.companyCode === requestedCompanyPerson.companyCode;});
 }

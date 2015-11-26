@@ -19,14 +19,10 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/satrapade/advanced-chat.git"
+    "url": "https://github.com/tomascharad/advanced-chat.git"
   },
-  "author": "Tamas Piros",
-  "url": "http://tamas.io",
-  "email": "me@tamas.io",
-  "license": "free",
-  "bugs": {
-    "url": "https://github.com/satrapade/advanced-chat/issues"
-  },
-  "homepage": "https://github.com/satrapade/advanced-chat"
+  "author": "Tomás Charad",
+  "url": "http://www.tcit.cl",
+  "email": "contact@tcit.cl",
+  "homepage": "https://github.com/tomascharad/advanced-chat"
 }
