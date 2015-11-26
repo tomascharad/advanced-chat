@@ -221,13 +221,15 @@ io.sockets.on("connection", function (socket) {
 			socket.emit("update", "You have connected to the server.");
 			var sameCompanyPersons = getSameCompanyPersons(joinedPerson);
 			sameCompanyPersons.forEach(function(person) {
-				person.socket.emit("update", email + " is online.");
-				person.socket.emit("update-people", {people: sameCompanyPersons, count: sizePeople});
+				person.sockets.forEach(function(socket) {
+					socket.emit("update", email + " is online.");
+					socket.emit("update-people", {people: sameCompanyPersons, count: sizePeople});
+					socket.emit("roomList", {rooms: rooms, count: sizeRooms});
+					socket.emit("joined"); //extra emit for GeoLocation
+				});
 			});
 			sizePeople = _.size(people);
 			sizeRooms = _.size(rooms);
-			socket.emit("roomList", {rooms: rooms, count: sizeRooms});
-			socket.emit("joined"); //extra emit for GeoLocation
 			sockets.push(socket);
 		}
 	});
