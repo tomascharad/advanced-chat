@@ -223,13 +223,11 @@ io.sockets.on("connection", function (socket) {
 			sameCompanyPersons.forEach(function(person) {
 				person.sockets.forEach(function(socket) {
 					socket.emit("update", email + " is online.");
-					socket.emit("update-people", {people: sameCompanyPersons, count: sizePeople});
-					socket.emit("roomList", {rooms: rooms, count: sizeRooms});
+					socket.emit("update-people", {people: sameCompanyPersons, count: _.size(people)});
+					socket.emit("roomList", {rooms: rooms, count: _.size(rooms)});
 					socket.emit("joined"); //extra emit for GeoLocation
 				});
 			});
-			sizePeople = _.size(people);
-			sizeRooms = _.size(rooms);
 			sockets.push(socket);
 		}
 	});
