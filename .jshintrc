@@ -1,0 +1,38 @@
+{
+    // Environments - these prevent warnings about the use of some global
+    // variables. e.g. 'browser' assumes a 'window' global is available, etc.
+    "browser": true,
+    "browserify": true,
+    "devel": true,
+    "node": true,
+    
+    "bitwise": true, 
+    "camelcase": true,
+    "curly": true, 
+    "eqeqeq": true, 
+    "forin": true, 
+    "freeze": true, 
+    "immed": true,
+    "indent": 2,    
+    "latedef": true,
+    "newcap": true,
+    "noarg": true, 
+    "noempty": true, 
+    "nonbsp": true, 
+    "nonew": true,
+    "plusplus": true,
+    "quotmark": true,
+                             
+    "undef": true, 
+    "unused": true, 
+                            
+    "strict": true, 
+    // "maxparams": true,
+    // "maxdepth": true,
+    // "maxstatements": true,
+    // "maxcomplexity": true,
+    "varstmt": true,
+
+    "esnext": true,
+    "es5": true
+}
