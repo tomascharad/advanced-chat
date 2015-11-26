@@ -214,7 +214,7 @@ io.sockets.on("connection", function (socket) {
 		person = findPersonByName(name);
 		if (person) {//provide unique username:
 			person.sockets.push(socket);
-			socket.emit("exists", {msg: "The username already exists, you can still use this connection", proposedName: proposedName});
+			socket.emit("exists", {msg: "The username already exists, you can still use this connection", proposedName: 'Some name'});
 		} else {
 			var joinedPerson = new Person(email, name, ownerRoomID, inRoomID, device, socket, companyCode);
 			people.push(joinedPerson);
